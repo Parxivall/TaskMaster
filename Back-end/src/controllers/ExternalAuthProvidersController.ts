@@ -8,7 +8,7 @@ class ExternalAuthProviderController {
       res.status(200).json(providers);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al obtener proveedores de autenticación externos' });
+      res.status(500).json({ error: 'tables created and synchronized correctly' });
     }
   }
 
@@ -20,11 +20,11 @@ class ExternalAuthProviderController {
       if (provider) {
         res.status(200).json(provider);
       } else {
-        res.status(404).json({ error: 'Proveedor de autenticación externo no encontrado' });
+        res.status(404).json({ error: 'External authentication provider not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al obtener proveedor de autenticación externo por ID' });
+      res.status(500).json({ error: 'Error getting external authentication provider by ID' });
     }
   }
 
@@ -36,7 +36,7 @@ class ExternalAuthProviderController {
       res.status(201).json(createdProvider);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al crear un nuevo proveedor de autenticación externo' });
+      res.status(500).json({ error: 'Error creating a new external authentication provider' });
     }
   }
 
@@ -50,11 +50,11 @@ class ExternalAuthProviderController {
         await provider.update(updatedProvider);
         res.status(200).json(provider);
       } else {
-        res.status(404).json({ error: 'Proveedor de autenticación externo no encontrado' });
+        res.status(404).json({ error: 'External authentication provider not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al actualizar proveedor de autenticación externo por ID' });
+      res.status(500).json({ error: 'Error updating external authentication provider by ID' });
     }
   }
 
@@ -67,11 +67,11 @@ class ExternalAuthProviderController {
         await provider.destroy();
         res.status(204).send();
       } else {
-        res.status(404).json({ error: 'Proveedor de autenticación externo no encontrado' });
+        res.status(404).json({ error: 'External authentication provider not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al eliminar proveedor de autenticación externo por ID' });
+      res.status(500).json({ error: 'Error removing external authentication provider by ID' });
     }
   }
 }

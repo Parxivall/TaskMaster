@@ -11,9 +11,10 @@ class ExternalAuthProvider extends Model {
   public username!: string | null;
   public created_at!: Date;
   public updated_at!: Date;
-}
 
-ExternalAuthProvider.init(
+  static initModel(sequelize: any) {
+
+  ExternalAuthProvider.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -60,5 +61,7 @@ ExternalAuthProvider.init(
     createdAt: 'created_at'
   }
 );
+  }
+}
 
 export default ExternalAuthProvider;

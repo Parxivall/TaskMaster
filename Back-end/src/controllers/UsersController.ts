@@ -8,7 +8,7 @@ class UserController {
       res.status(200).json(users);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al obtener usuarios' });
+      res.status(500).json({ error: 'Error to get the user' });
     }
   }
 
@@ -20,11 +20,11 @@ class UserController {
       if (user) {
         res.status(200).json(user);
       } else {
-        res.status(404).json({ error: 'Usuario no encontrado' });
+        res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al obtener usuario por ID' });
+      res.status(500).json({ error: 'Error to geting the user for id' });
     }
   }
 
@@ -36,7 +36,7 @@ class UserController {
       res.status(201).json(createdUser);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al crear un nuevo usuario' });
+      res.status(500).json({ error: 'Error to crated new user' });
     }
   }
 
@@ -50,11 +50,11 @@ class UserController {
         await user.update(updatedUser);
         res.status(200).json(user);
       } else {
-        res.status(404).json({ error: 'Usuario no encontrado' });
+        res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al actualizar usuario por ID' });
+      res.status(500).json({ error: 'Error to updated the user for id ' });
     }
   }
 
@@ -67,11 +67,11 @@ class UserController {
         await user.destroy();
         res.status(204).send();
       } else {
-        res.status(404).json({ error: 'Usuario no encontrado' });
+        res.status(404).json({ error: 'User not found' });
       }
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error al eliminar usuario por ID' });
+      res.status(500).json({ error: 'Error to deletion user for id' });
     }
   }
 }

@@ -2,13 +2,10 @@ import sequelize from '../config/config';
 import User from './Users';
 import ExternalAuthProvider from './ExternalAuthProviders';
 
-export const models = {
-    User,
-    ExternalAuthProvider
-};
+(async () => {
+  User.initModel(sequelize);
+  ExternalAuthProvider.initModel(sequelize);
+  console.log("tables created and synchronized correctly")
 
-sequelize.sync({ alter: true }).then(() => {
-    console.log('Tables created (full synchronization).');
-}).catch((error) => {
-    console.error('Error synchronizing tables:', error);
-});
+//   await sequelize.sync({ force: true });
+})();
