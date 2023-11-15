@@ -30,13 +30,18 @@ class UserController {
 
   async createUser(req: Request, res: Response) {
     const newUser = req.body;
-
+    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH:", req.body);
+  
+    if (!newUser.phone || !newUser.nombre || !newUser.email || !newUser.roles) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+  
     try {
       const createdUser = await User.create(newUser);
       res.status(201).json(createdUser);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: 'Error to crated new user' });
+      res.status(500).json({ error: 'Error to create new user' });
     }
   }
 
