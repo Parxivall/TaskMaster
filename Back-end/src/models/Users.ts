@@ -21,7 +21,7 @@ class User extends Model {
           primaryKey: true,
         },
         phone: {
-          type: DataTypes.STRING(15),
+          type: DataTypes.STRING(20),
           allowNull: false,
         },
         nombre: {

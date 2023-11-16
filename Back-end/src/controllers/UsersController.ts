@@ -1,84 +1,80 @@
 import { Request, Response } from 'express';
 import User from '../models/Users';
 
-class UserController {
-  async getAllUsers(req: Request, res: Response) {
-    try {
-      const users = await User.findAll();
-      res.status(200).json(users);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error to get the user' });
-    }
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.findAll();
+    res.status(200).json(users);
+  } catch (error) {
+    console.error('Error fetching users:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to fetch users' });
   }
+};
 
-  async getUserById(req: Request, res: Response) {
-    const { id } = req.params;
-
-    try {
-      const user = await User.findByPk(id);
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({ error: 'User not found' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error to geting the user for id' });
+export const getUserById = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(404).json({ error: 'User not found' });
     }
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to fetch user by ID' });
   }
+};
 
-  async createUser(req: Request, res: Response) {
-    const newUser = req.body;
-    console.log("AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH:", req.body);
-  
-    if (!newUser.phone || !newUser.nombre || !newUser.email || !newUser.roles) {
-      return res.status(400).json({ error: 'Missing required fields' });
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    if (!req.body) {
+      return res.status(400).json({ error: 'Bad Request: Request body is missing' });
     }
-  
-    try {
-      const createdUser = await User.create(newUser);
-      res.status(201).json(createdUser);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error to create new user' });
+
+    const { phone, nombre, email, roles } = req.body;
+
+    if (!phone || !nombre || !email || !roles) {
+      return res.status(400).json({ error: 'Bad Request: Missing required fields' });
     }
+
+    const user = await User.create(req.body);
+    res.status(201).json(user);
+  } catch (error) {
+    console.error('Error creating user:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to create new user' });
   }
+};
 
-  async updateUser(req: Request, res: Response) {
-    const { id } = req.params;
-    const updatedUser = req.body;
-
-    try {
-      const user = await User.findByPk(id);
-      if (user) {
-        await user.update(updatedUser);
-        res.status(200).json(user);
-      } else {
-        res.status(404).json({ error: 'User not found' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error to updated the user for id ' });
+export const updateUser = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
     }
-  }
 
-  async deleteUser(req: Request, res: Response) {
-    const { id } = req.params;
-
-    try {
-      const user = await User.findByPk(id);
-      if (user) {
-        await user.destroy();
-        res.status(204).send();
-      } else {
-        res.status(404).json({ error: 'User not found' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Error to deletion user for id' });
+    if (!req.body || Object.keys(req.body).length === 0) {
+      return res.status(400).json({ error: 'Bad Request: Request body is missing or empty' });
     }
-  }
-}
 
-export default new UserController();
+    await user.update(req.body);
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error updating user by ID:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to update user by ID' });
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const user = await User.findByPk(req.params.id);
+    if (user) {
+      await user.destroy();
+      res.status(204).json({});
+    } else {
+      res.status(404).json({ error: 'User not found' });
+    }
+  } catch (error) {
+    console.error('Error deleting user by ID:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to delete user by ID' });
+  }
+};

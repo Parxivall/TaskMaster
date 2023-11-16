@@ -23,6 +23,11 @@ class ExternalAuthProvider extends Model {
     },
     user_id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      validate: {
+        isUUID: 4,
+      },
       references: {
         model: User,
         key: 'id',
