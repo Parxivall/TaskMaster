@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
 import express, { Application, Request, Response } from 'express';
 import bodyParser from 'body-parser';
-import sequelize from "../src/config/config";
+import sequelize from "./config/config";
 import router from './routes/index';
 require('./models/index');
 
