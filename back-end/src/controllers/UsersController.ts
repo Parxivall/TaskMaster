@@ -1,3 +1,5 @@
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import User from '../models/Users';
 
@@ -31,13 +33,20 @@ export const createUser = async (req: Request, res: Response) => {
       return res.status(400).json({ error: 'Bad Request: Request body is missing' });
     }
 
-    const { phone, nombre, email, roles } = req.body;
+    const { phone, nombre, email, roles, password } = req.body;
 
-    if (!phone || !nombre || !email || !roles) {
+    if (!phone || !nombre || !email || !roles || !password) {
       return res.status(400).json({ error: 'Bad Request: Missing required fields' });
     }
 
-    const user = await User.create(req.body);
+    const hashedPassword = await hashPassword(password);
+
+    const user = await User.create({ phone, nombre, email, roles, password_hash: hashedPassword });
+
+    const token = generateToken(user.id);
+    user.token = token;
+    await user.save();
+
     res.status(201).json(user);
   } catch (error) {
     console.error('Error creating user:', error);
@@ -77,4 +86,20 @@ export const deleteUser = async (req: Request, res: Response) => {
     console.error('Error deleting user by ID:', error);
     res.status(500).json({ error: 'Internal Server Error: Unable to delete user by ID' });
   }
+};
+
+const hashPassword = async (password: string) => {
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  return hashedPassword;
+};
+
+const generateToken = (userId: string) => {
+  const token = jwt.sign({ userId }, 'secretKey', { expiresIn: '1h' });
+  return token;
+};
+
+const comparePasswords = async (password: string, hashedPassword: string) => {
+  const isMatch = await bcrypt.compare(password, hashedPassword);
+  return isMatch;
 };
