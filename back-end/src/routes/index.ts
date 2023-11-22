@@ -9,6 +9,7 @@ router.get('/users/:id',UsersRoutes);
 router.post('/users',UsersRoutes);
 router.patch('/users/:id',UsersRoutes);
 router.delete('/users/:id',UsersRoutes);
+router.post('/users/login',UsersRoutes);
 
 router.get('/external-auth-providers',ExternalAuthProvidersRoutes);
 router.get('/external-auth-providers/:id',ExternalAuthProvidersRoutes);

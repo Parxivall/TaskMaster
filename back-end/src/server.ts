@@ -3,7 +3,8 @@ import express, { Application, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import sequelize from "./config/config";
 import router from './routes/index';
-import cors from 'cors'; // Importa cors
+import routerGoogle from './routes/GoogleRoutes';
+import cors from 'cors';
 
 require('./models/index');
 
@@ -12,9 +13,8 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
-// Configura CORS
 app.use(cors({
-  origin: 'http://localhost:3000', // Reemplaza con la URL de tu frontend
+  origin: 'http://localhost:3000',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
@@ -31,6 +31,7 @@ sequelize
   });
 
 app.use('/api', router);
+app.use('/google/', routerGoogle);
 
 app.use((_req, res) => {
   res.status(404).send('404 - Page not found');

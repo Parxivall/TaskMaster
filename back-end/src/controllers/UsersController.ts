@@ -88,18 +88,46 @@ export const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-const hashPassword = async (password: string) => {
-  const saltRounds = 10;
-  const hashedPassword = await bcrypt.hash(password, saltRounds);
-  return hashedPassword;
-};
 
-const generateToken = (userId: string) => {
-  const token = jwt.sign({ userId }, 'secretKey', { expiresIn: '1h' });
-  return token;
-};
+export const loginUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
 
-const comparePasswords = async (password: string, hashedPassword: string) => {
-  const isMatch = await bcrypt.compare(password, hashedPassword);
-  return isMatch;
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    if (!user.password_hash) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const isMatch = await comparePasswords(password, user.password_hash);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const token = generateToken(user.id);
+    res.status(200).json({ user, token });
+  } catch (error) {
+    console.error('Error logging in user:', error);
+    res.status(500).json({ error: 'Internal Server Error: Unable to log in user' });
+  }
 };
+  const hashPassword = async (password: string) => {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    return hashedPassword;
+  };
+  
+  const generateToken = (userId: string) => {
+    const token = jwt.sign({ userId }, 'secretKey', { expiresIn: '1h' });
+    return token;
+  };
+  
+  const comparePasswords = async (password: string, hashedPassword: string) => {
+    const isMatch = await bcrypt.compare(password, hashedPassword);
+    return isMatch;
+  };

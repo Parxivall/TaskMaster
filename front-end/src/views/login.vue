@@ -26,7 +26,10 @@
           />
           
           <p>
-            ¿Olvidaste tu contraseña? <span @click="handleForgotPassword" class="forgot-password-link">Recupérala aquí</span>.
+            ¿Olvidaste tu contraseña? <router-link to="" @click="handleForgotPassword" class="forgot-password-link">Recupérala aquí</router-link>.
+          </p>
+          <p>
+            ¿No tiene cuenta aún? <router-link to="/register" class="register">Regístrese aquí</router-link>.
           </p>
 
           <div class="button-group">
@@ -35,6 +38,7 @@
               class="mr-2"
               @click="login"
               :disabled="!isFormValid"
+              enter-key-behavior
             >
               Iniciar sesión
             </v-btn>
@@ -64,6 +68,7 @@
 </template>
 
 <script lang="ts">
+import axios from 'axios';
 
 export default {
   data() {
@@ -78,22 +83,32 @@ export default {
     }
   },
   methods: {
-    login() {
-      // Agrega aquí tu lógica de inicio de sesión
-      console.log("Lógica de inicio de sesión aquí");
+    async login() {
+      try {
+        const response = await axios.post('http://localhost:3333/api/users/login', {
+          email: this.email,
+          password: this.password
+        });
+        const { user, token } = response.data;
+        sessionStorage.setItem('token', token);
+        this.$router.push('/home');
+      } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+      }
     },
+
     reset() {
-      // Agrega aquí tu lógica de restablecimiento de contraseña
       console.log("Lógica de restablecimiento de contraseña aquí");
     },
+
     loginWithGoogle() {
-      // Agrega aquí tu lógica de inicio de sesión con Google
       console.log("Lógica de inicio de sesión con Google aquí");
     },
+
     handleForgotPassword() {
-      // Lógica que se ejecutará al hacer clic en "Recupérala aquí"
       console.log('Enlace "Recupérala aquí" clicado');
     },
+    
   }
 };
 </script>
@@ -111,7 +126,7 @@ export default {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  margin-top: 50px; /* Ajusta el margen superior según tus necesidades */
+  margin-top: 50px;
 }
 
 .login-title {
@@ -122,15 +137,15 @@ export default {
 }
 
 .forgot-password-link {
-  color: blue; /* Color del enlace */
-  text-decoration: underline; /* Subrayado como un enlace */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el "enlace" */
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
+  margin-top: 20px;
 }
 
 .google-btn {
@@ -140,6 +155,6 @@ export default {
 }
 
 .google-img {
-  margin-right: 10px; /* Ajusta el margen derecho según tus necesidades */
+  margin-right: 10px;
 }
 </style>

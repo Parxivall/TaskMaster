@@ -24,6 +24,7 @@
 <script lang="ts">
 import { ref } from 'vue';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 export default {
     name: 'Register',
@@ -33,6 +34,7 @@ export default {
         const email = ref('');
         const password = ref('');
         const roles = ref('user');
+        const router = useRouter();
 
         const registerUser = async () => {
             try {
@@ -46,9 +48,7 @@ export default {
                     password: password.value,
                     roles: [roles.value],
                 });
-                console.log(phone.value, nombre.value, email.value, password.value, roles.value),
-
-                console.log('User created:', response.data);
+                router.push('/login');
             } catch (error) {
                 console.error('Error creating user:', error);
             }
@@ -68,4 +68,3 @@ export default {
 
 <style scoped>
 </style>
-
