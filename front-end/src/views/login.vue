@@ -43,6 +43,7 @@
               Iniciar sesión
             </v-btn>
 
+            <br>
             <v-btn
               color="primary"
               @click="loginWithGoogle"

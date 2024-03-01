@@ -8,7 +8,7 @@
       "forceConsistentCasingInFileNames": true,
       "outDir": "./dist",
       "rootDir": "./src",
-      "types": ["sequelize", "node", "express", "mocha", "chai", "jest"]
+      "types": ["sequelize", "node", "express", "mocha", "jest"]
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
