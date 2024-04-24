@@ -41,7 +41,7 @@ export default {
                 if (!phone.value || !nombre.value || !email.value || !password.value || !roles.value) {
                     throw new Error('Bad Request: Missing required fields');
                 }
-                const response = await axios.post('http://localhost:3333/api/users', {
+                await axios.post('http://localhost:3333/api/users', {
                     phone: phone.value,
                     nombre: nombre.value,
                     email: email.value,
