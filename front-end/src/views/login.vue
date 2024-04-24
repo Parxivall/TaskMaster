@@ -4,6 +4,15 @@
 
       <div class="page-login">
         <v-card class="login-card">
+          <div class="logo-container">
+            <v-img
+              src="@/assets/logo.jpeg"
+              alt="UTP"
+              height="135"
+              width="135"
+            >
+            </v-img>
+          </div>
       <v-card-title class="login-title">
         Iniciar sesión
       </v-card-title>
@@ -90,7 +99,7 @@ export default {
           email: this.email,
           password: this.password
         });
-        const { user, token } = response.data;
+        const { token } = response.data;
         sessionStorage.setItem('token', token);
         this.$router.push('/home');
       } catch (error) {
@@ -98,12 +107,23 @@ export default {
       }
     },
 
-    reset() {
-      console.log("Lógica de restablecimiento de contraseña aquí");
+    async loginWithGoogle() {
+    try {
+          const response = await axios.get('http://localhost:3333/google/authUrl');
+          const authUrl = response.data.authUrl;
+          
+          if (authUrl) {
+            window.open(authUrl, '_blank');
+          } else {
+              console.error('No se encontró la URL de autorización en la respuesta del servidor.');
+            }
+      } catch (error) {
+          console.error(error);
+        }
     },
 
-    loginWithGoogle() {
-      console.log("Lógica de inicio de sesión con Google aquí");
+    reset() {
+      console.log("Lógica de restablecimiento de contraseña aquí");
     },
 
     handleForgotPassword() {
@@ -115,6 +135,12 @@ export default {
 </script>
 
 <style scoped>
+.logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+}
 .page-login {
   display: flex;
   justify-content: center;
