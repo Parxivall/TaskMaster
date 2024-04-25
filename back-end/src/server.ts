@@ -5,6 +5,7 @@ import sequelize from "./config/config";
 import router from './routes/index';
 import routerGoogle from './routes/GoogleRoutes';
 import cors from 'cors';
+import morgan from 'morgan';
 
 require('./models/index');
 
@@ -18,6 +19,8 @@ app.use(cors({
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 }));
+
+app.use(morgan('dev'));
 
 const port = process.env.PORT || 3333;
 

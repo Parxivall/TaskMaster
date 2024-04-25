@@ -8,8 +8,9 @@
             <v-img
               src="@/assets/logo.jpeg"
               alt="UTP"
-              height="135"
-              width="135"
+              height="100"
+              width="100"
+              class="rounded-circle"
             >
             </v-img>
           </div>
@@ -136,12 +137,14 @@ export default {
 
 <style scoped>
 .logo-container {
+
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-
 }
+
 .page-login {
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,6 +152,7 @@ export default {
 }
 
 .login-card {
+
   max-width: 400px;
   padding: 30px;
   border-radius: 20px;
@@ -157,6 +161,7 @@ export default {
 }
 
 .login-title {
+
   font-size: 24px;
   font-weight: 600;
   text-align: center;
@@ -164,24 +169,28 @@ export default {
 }
 
 .forgot-password-link {
-  color: blue;
+
+  color: rgb(9, 9, 219);
   text-decoration: underline;
   cursor: pointer;
 }
 
 .button-group {
+
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
 .google-btn {
+
   flex: 1;
   display: flex;
   align-items: center;
 }
 
 .google-img {
+  
   margin-right: 10px;
 }
 </style>
