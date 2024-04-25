@@ -165,7 +165,7 @@ export default {
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  color: rgb(91, 143, 185);
+  color: rgb(19, 67, 104);
 }
 
 .forgot-password-link {
