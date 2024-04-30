@@ -56,7 +56,7 @@
       </v-btn>
       <v-app-bar-title>
         <v-icon icon="mdi-circle-slice-4" />
-        <span class="ml-2">TaskMaster</span>
+        <span class="ml-2">AtivoVO</span>
       </v-app-bar-title>
     </v-app-bar>
 </template>

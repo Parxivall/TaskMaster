@@ -15,31 +15,31 @@
             </v-img>
           </div>
       <v-card-title class="login-title">
-        Iniciar sesión
+        Iniciar sessão
       </v-card-title>
 
       <v-card-text>
         <v-form @submit.prevent="login">
           <v-text-field
             v-model="email"
-            label="Correo electrónico"
+            label="Email"
             required
             outlined
           />
           
           <v-text-field
             v-model="password"
-            label="Contraseña"
+            label="Senha"
             type="password"
             required
             outlined
           />
           
           <p>
-            ¿Olvidaste tu contraseña? <router-link to="" @click="handleForgotPassword" class="forgot-password-link">Recupérala aquí</router-link>.
+            Esqueceu sua senha? <router-link to="" @click="handleForgotPassword" class="forgot-password-link">Recupere sua senha</router-link>.
           </p>
           <p>
-            ¿No tiene cuenta aún? <router-link to="/register" class="register">Regístrese aquí</router-link>.
+            Ainda não tem conta? <router-link to="/register" class="register">Regístrese aquí</router-link>.
           </p>
 
           <div class="button-group">
@@ -50,7 +50,7 @@
               :disabled="!isFormValid"
               enter-key-behavior
             >
-              Iniciar sesión
+              Iniciar sessão
             </v-btn>
 
             <br>
@@ -124,7 +124,7 @@ export default {
     },
 
     reset() {
-      console.log("Lógica de restablecimiento de contraseña aquí");
+      console.log("Lógica de restablecimiento de Senha aquí");
     },
 
     handleForgotPassword() {
