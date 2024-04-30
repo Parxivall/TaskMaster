@@ -14,3 +14,11 @@ export const generateAuthUrl = async (req: Request, res: Response): Promise<void
   
     res.status(200).json({ authUrl });
 }
+
+export const getGoogleUser = async (req: Request, res: Response): Promise<void> => {
+    const code = req.query.code;
+    const clientId = '660395553220-tm5pd5s9l8icsl115kt7hp66hah6342j.apps.googleusercontent.com';
+    const clientSecret = '3gNzI5Q6Q6J9Q6J9Q6J9Q6J9';
+    const redirectUri = 'http://localhost:3000/home';
+    console.log('code', code);0
+}
