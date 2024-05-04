@@ -24,7 +24,7 @@ const routes = [
         name: 'register',
         component: () => import('@/views/register.vue'),
 
-      }
+      },
     ],
   },
 ]

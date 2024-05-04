@@ -8,37 +8,38 @@
             <v-img
               src="@/assets/logo.jpeg"
               alt="UTP"
-              height="135"
-              width="135"
+              height="100"
+              width="100"
+              class="rounded-circle"
             >
             </v-img>
           </div>
       <v-card-title class="login-title">
-        Iniciar sesión
+        Iniciar sessão
       </v-card-title>
 
       <v-card-text>
         <v-form @submit.prevent="login">
           <v-text-field
             v-model="email"
-            label="Correo electrónico"
+            label="Email"
             required
             outlined
           />
           
           <v-text-field
             v-model="password"
-            label="Contraseña"
+            label="Senha"
             type="password"
             required
             outlined
           />
           
           <p>
-            ¿Olvidaste tu contraseña? <router-link to="" @click="handleForgotPassword" class="forgot-password-link">Recupérala aquí</router-link>.
+            Esqueceu sua senha? <router-link to="" @click="handleForgotPassword" class="forgot-password-link">Recupere sua senha</router-link>.
           </p>
           <p>
-            ¿No tiene cuenta aún? <router-link to="/register" class="register">Regístrese aquí</router-link>.
+            Ainda não tem conta? <router-link to="/register" class="register">Regístrese aquí</router-link>.
           </p>
 
           <div class="button-group">
@@ -49,7 +50,7 @@
               :disabled="!isFormValid"
               enter-key-behavior
             >
-              Iniciar sesión
+              Iniciar sessão
             </v-btn>
 
             <br>
@@ -123,7 +124,7 @@ export default {
     },
 
     reset() {
-      console.log("Lógica de restablecimiento de contraseña aquí");
+      console.log("Lógica de restablecimiento de Senha aquí");
     },
 
     handleForgotPassword() {
@@ -136,12 +137,14 @@ export default {
 
 <style scoped>
 .logo-container {
+
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-
 }
+
 .page-login {
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -149,6 +152,7 @@ export default {
 }
 
 .login-card {
+
   max-width: 400px;
   padding: 30px;
   border-radius: 20px;
@@ -157,31 +161,36 @@ export default {
 }
 
 .login-title {
+
   font-size: 24px;
   font-weight: 600;
   text-align: center;
-  color: rgb(91, 143, 185);
+  color: rgb(19, 67, 104);
 }
 
 .forgot-password-link {
-  color: blue;
+
+  color: rgb(9, 9, 219);
   text-decoration: underline;
   cursor: pointer;
 }
 
 .button-group {
+
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 }
 
 .google-btn {
+
   flex: 1;
   display: flex;
   align-items: center;
 }
 
 .google-img {
+  
   margin-right: 10px;
 }
 </style>
