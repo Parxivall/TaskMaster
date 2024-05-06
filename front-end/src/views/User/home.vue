@@ -1,4 +1,5 @@
 <template>
+  <h1>Home User</h1>
   <div>
     <v-btn
       color="primary"
@@ -18,7 +19,6 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
 import axios from 'axios';
 
 const linkWithGoogle = async () => {

@@ -11,7 +11,13 @@
                             <v-text-field v-model="phone" label="Teléfono" required></v-text-field>
                             <v-text-field v-model="nombre" label="Nombre" required></v-text-field>
                             <v-text-field v-model="email" label="Email" required></v-text-field>
-                            <v-text-field v-model="password" label="Contraseña" type="password" required outlined/>
+                            <v-text-field 
+                            v-model="password" 
+                            label="Contraseña" 
+                            type="password" 
+                            required 
+                            outlined 
+                            :rules="[value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/.test(value) || 'Debe contener símbolos, números, mayúsculas y minúsculas']"/>
                             <v-btn type="submit" color="primary" class="mx-auto">Registrarse</v-btn>
                         </v-form>
                     </v-card-text>
@@ -41,7 +47,7 @@ export default {
                 if (!phone.value || !nombre.value || !email.value || !password.value || !roles.value) {
                     throw new Error('Bad Request: Missing required fields');
                 }
-                const response = await axios.post('http://localhost:3333/api/users', {
+                await axios.post('http://localhost:3333/api/users', {
                     phone: phone.value,
                     nombre: nombre.value,
                     email: email.value,
