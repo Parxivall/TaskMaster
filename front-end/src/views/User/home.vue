@@ -1,5 +1,5 @@
 <template>
-  <h1>Home User</h1>
+  <h1>Configuraçao</h1>
   <div>
     <v-btn
       color="primary"

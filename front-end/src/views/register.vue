@@ -8,16 +8,16 @@
                     </v-card-title>
                     <v-card-text>
                         <v-form @submit.prevent="registerUser">
-                            <v-text-field v-model="phone" label="Teléfono" required></v-text-field>
-                            <v-text-field v-model="nombre" label="Nombre" required></v-text-field>
+                            <v-text-field v-model="nombre" label="Nome" required></v-text-field>
+                            <v-text-field v-model="phone" label="Teléfone" required></v-text-field>
                             <v-text-field v-model="email" label="Email" required></v-text-field>
                             <v-text-field 
                             v-model="password" 
-                            label="Contraseña" 
+                            label="Senha" 
                             type="password" 
                             required 
                             outlined 
-                            :rules="[value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/.test(value) || 'Debe contener símbolos, números, mayúsculas y minúsculas']"/>
+                            :rules="[value => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/.test(value) || 'Deve conter símbolos, números, maiúsculas e minúsculas']"/>
                             <v-btn type="submit" color="primary" class="mx-auto">Registrarse</v-btn>
                         </v-form>
                     </v-card-text>

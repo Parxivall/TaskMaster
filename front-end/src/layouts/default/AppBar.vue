@@ -26,7 +26,7 @@
         </v-list-item>
         <v-divider></v-divider>
         <v-list-item @click="handleMenuItemClick('Item 3')">
-          <v-list-item-content>
+          <v-list-item-content @click="$router.push('/home')">
             <v-list-item-title>Home User</v-list-item-title>
             <v-list-item-icon>
               <v-icon>mdi-home</v-icon>
